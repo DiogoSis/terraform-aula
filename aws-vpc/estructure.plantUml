@@ -1,0 +1,29 @@
+@startuml
+skinparam componentStyle rectangle
+
+package "VPC - vpc-terraform" {
+  component "VPC (10.0.0.0/16)" as VPC {
+    
+    package "Subnets" {
+      component "Subnet (10.0.1.0/24)" as Subnet
+    }
+    
+    package "Route Tables" {
+      component "Route Table - route-table-terraform" as RouteTable
+    }
+
+    component "Internet Gateway - internet-gateway-terraform" as IGW
+    component "Security Group - security-group-terraform" as SG
+
+    Subnet -down-> RouteTable : Route Table Association
+    RouteTable --> IGW : 0.0.0.0/0 Route to Internet
+
+    IGW --> "Internet"
+
+    Subnet --> "EC2 Instance"
+    
+    SG --> "EC2 Instance" : Allow SSH (port 22)
+  }
+}
+
+@enduml
