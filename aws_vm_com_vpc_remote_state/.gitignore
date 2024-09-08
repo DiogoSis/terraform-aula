@@ -25,6 +25,7 @@ override.tf.json
 *.key
 credentials
 config
+azure-key
 aws-key
 *.pub
 

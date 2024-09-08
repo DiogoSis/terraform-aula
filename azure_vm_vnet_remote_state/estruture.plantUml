@@ -1,0 +1,29 @@
+@startuml
+
+package "Terraform Setup" {
+  [Terraform] --> [Azure Resource Group]
+  [Terraform] --> [Remote VNET Data]
+}
+
+package "Azure Infrastructure" {
+  [Azure Resource Group] --> [Public IP]
+  [Public IP] --> [Network Interface]
+  [Network Interface] --> [Linux VM]
+  [Linux VM] --> [SSH Key]
+}
+
+package "Remote VNET Resources" {
+  [Subnet ID]
+  [Security Group ID]
+  [Remote VNET] --> [Subnet ID]
+  [Remote VNET] --> [Security Group ID]
+  [Remote VNET] --> [Network Interface]
+}
+
+package "Outputs" {
+  [VM Public IP]
+}
+
+[Azure Infrastructure] --> [Outputs]
+
+@enduml
