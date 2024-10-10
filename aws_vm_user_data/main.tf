@@ -9,13 +9,13 @@ terraform {
 
   backend "s3" {
     bucket = "aula-terraform-aws-azure"
-    key    = "aws-vm-provisioners/terraform.tfstate"
+    key    = "aws-vm-user-data/terraform.tfstate"
     region = "us-east-1"
   }
 }
 
 provider "aws" {
-  region = "eu-central-1"
+  region = "us-east-1"
 
   default_tags {
     tags = {
